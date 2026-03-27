@@ -1,0 +1,44 @@
+@import "tailwindcss";
+
+@theme {
+  --color-brand-terracotta: #833928;
+  --color-brand-terracotta-light: #a1503d;
+  --color-brand-navy: #000080;
+  --color-brand-navy-light: #4b53bc;
+  --color-brand-cream: #fbfbe2;
+  --color-brand-cream-dark: #f5f5dc;
+  --color-brand-text: #1b1d0e;
+  --color-brand-outline: #dac1bb;
+  
+  --font-serif: var(--font-noto-serif), serif;
+  --font-sans: var(--font-manrope), sans-serif;
+}
+
+@layer base {
+  body {
+    @apply bg-brand-cream text-brand-text font-sans antialiased;
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-serif font-bold tracking-tight text-brand-terracotta;
+  }
+}
+
+@layer components {
+  .btn-primary {
+    @apply bg-linear-to-tr from-brand-terracotta to-brand-terracotta-light text-white px-8 py-4 rounded-lg hover:opacity-90 transition-all font-medium shadow-sm active:scale-95;
+  }
+  
+  .btn-secondary {
+    @apply border border-brand-outline/20 text-brand-navy-light px-8 py-4 rounded-lg hover:bg-brand-navy-light/5 transition-all font-medium;
+  }
+
+  .dev-credit {
+    @apply text-xs opacity-50 mt-8 text-center py-6 border-t border-brand-outline/10;
+  }
+
+  /* Editorial Spacing */
+  .section-padding {
+    @apply py-20 md:py-32;
+  }
+}
