@@ -3,7 +3,7 @@ services:
     image: postgres:15
     environment:
       POSTGRES_USER: medusa
-      POSTGRES_PASSWORD: medusa_password
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
       POSTGRES_DB: medusa_db
     volumes:
       - postgres_data:/var/lib/postgresql/data
@@ -21,7 +21,7 @@ services:
       context: ./backend
       dockerfile: Dockerfile
     environment:
-      - DATABASE_URL=postgres://medusa:medusa_password@postgres:5432/medusa_db
+      - DATABASE_URL=postgres://medusa:${POSTGRES_PASSWORD}@postgres:5432/medusa_db
       - REDIS_URL=redis://redis:6379
       - STORE_CORS=https://momo.minutarecore.space
       - ADMIN_CORS=https://api.momo.minutarecore.space
