@@ -43,7 +43,7 @@ services:
       args:
         NEXT_PUBLIC_MEDUSA_BACKEND_URL: https://api.momo.minutarecore.space
     ports:
-      - "3000:3000"
+      - "3344:3000"
     depends_on:
       - backend
 
