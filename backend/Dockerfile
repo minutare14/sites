@@ -11,6 +11,5 @@ COPY . .
 RUN npm run build
 
 EXPOSE 9000
-EXPOSE 7001
 
-CMD ["npm", "run", "dev"]
+CMD ["npm", "run", "start"]
