@@ -35,6 +35,15 @@ services:
         condition: service_healthy
       redis:
         condition: service_started
+    networks:
+      - dokploy-network
+      - default
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.momo-backend.rule=Host(`api.momo.minutarecore.space`)"
+      - "traefik.http.routers.momo-backend.entrypoints=web,websecure"
+      - "traefik.http.routers.momo-backend.tls.certresolver=letsencrypt"
+      - "traefik.http.services.momo-backend.loadbalancer.server.port=9000"
 
   storefront:
     build:
@@ -46,6 +55,19 @@ services:
       - "3344:3000"
     depends_on:
       - backend
+    networks:
+      - dokploy-network
+      - default
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.momo-storefront.rule=Host(`momo.minutarecore.space`)"
+      - "traefik.http.routers.momo-storefront.entrypoints=web,websecure"
+      - "traefik.http.routers.momo-storefront.tls.certresolver=letsencrypt"
+      - "traefik.http.services.momo-storefront.loadbalancer.server.port=3000"
+
+networks:
+  dokploy-network:
+    external: true
 
 volumes:
   postgres_data:
