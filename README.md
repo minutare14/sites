@@ -104,3 +104,5 @@ Se voce quiser deixar o mesmo compose pronto para producao sem renomear servicos
 - `ALLOWED_HOSTS=localhost,127.0.0.1,backend,saleor-api,api.momo.minutarecore.space`
 
 O proxy `backend` expõe um `GET /healthz` local para os healthchecks do Docker e do Traefik. Isso evita depender do `Host` interno efêmero do Traefik ao verificar o Saleor por trás do proxy.
+
+Quando o deploy roda no Dokploy, o proprio painel injeta os routers/services finais do Traefik com base nos dominios configurados. Por isso o compose mantém apenas `traefik.enable=true` e `traefik.docker.network=dokploy-network`, sem definir routers duplicados no repositório.
