@@ -69,6 +69,8 @@ services:
         condition: service_started
       mailpit:
         condition: service_started
+      saleor-migrate:
+        condition: service_completed_successfully
     env_file:
       - ./saleor/common.env
       - ./saleor/backend.env
@@ -87,6 +89,26 @@ services:
     networks:
       - dokploy-network
 
+  saleor-migrate:
+    image: ghcr.io/saleor/saleor:3.22
+    command: python manage.py migrate --noinput
+    depends_on:
+      saleor-db:
+        condition: service_healthy
+      saleor-cache:
+        condition: service_started
+      mailpit:
+        condition: service_started
+    env_file:
+      - ./saleor/common.env
+      - ./saleor/backend.env
+    environment:
+      ALLOWED_HOSTS: ${SALEOR_ALLOWED_HOSTS:-localhost,127.0.0.1,backend,saleor-api,api.momo.minutarecore.space}
+      DASHBOARD_URL: ${SALEOR_DASHBOARD_PUBLIC_URL:-http://localhost:8100/app/}
+      PUBLIC_URL: ${BACKEND_PUBLIC_URL:-http://localhost:8100/}
+    networks:
+      - dokploy-network
+
   saleor-worker:
     image: ghcr.io/saleor/saleor:3.22
     command: celery -A saleor --app=saleor.celeryconf:app worker --loglevel=info -B
@@ -97,6 +119,8 @@ services:
         condition: service_started
       mailpit:
         condition: service_started
+      saleor-migrate:
+        condition: service_completed_successfully
     env_file:
       - ./saleor/common.env
       - ./saleor/backend.env
