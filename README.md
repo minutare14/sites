@@ -46,6 +46,7 @@ Antes do primeiro boot, copie [`.env.example`](C:\Users\emano\OneDrive\Documento
 - URLs publicas
 - `SECRET_KEY`
 - admin do Saleor (`DJANGO_SUPERUSER_EMAIL`, `DJANGO_SUPERUSER_PASSWORD`)
+- `ALLOWED_HOSTS`, se voce quiser sobrescrever os hosts permitidos do Saleor
 
 ## Preparar banco
 
@@ -100,4 +101,6 @@ Se voce quiser deixar o mesmo compose pronto para producao sem renomear servicos
 - `BACKEND_PUBLIC_URL=https://api.momo.minutarecore.space/`
 - `SALEOR_GRAPHQL_PUBLIC_URL=https://api.momo.minutarecore.space/graphql/`
 - `SALEOR_DASHBOARD_PUBLIC_URL=https://api.momo.minutarecore.space/app/`
-- `SALEOR_ALLOWED_HOSTS=localhost,127.0.0.1,backend,saleor-api,api.momo.minutarecore.space`
+- `ALLOWED_HOSTS=localhost,127.0.0.1,backend,saleor-api,api.momo.minutarecore.space`
+
+O proxy `backend` expõe um `GET /healthz` local para os healthchecks do Docker e do Traefik. Isso evita depender do `Host` interno efêmero do Traefik ao verificar o Saleor por trás do proxy.
