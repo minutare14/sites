@@ -1,42 +1,49 @@
-import Navbar from "@/components/Navbar";
-
 export default function AboutPage() {
   return (
-    <div className="flex flex-col font-sans">
-      <Navbar />
-      <section className="section-padding bg-brand-cream mt-20">
-        <div className="container mx-auto px-6">
-          <div className="max-w-4xl mx-auto">
-            <h4 className="uppercase text-[0.6rem] tracking-[0.3em] font-bold text-brand-navy mb-6">Nossa História</h4>
-            <h1 className="text-5xl md:text-7xl font-serif mb-12 leading-tight">Momo & Cia: A Essência do <span className="italic">Empoderamento</span></h1>
-            
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-16 items-start">
-              <div className="space-y-8 text-lg font-light leading-relaxed text-brand-text/80">
-                <p>
-                  Fundada há dois anos em São Paulo, a Momo & Cia nasceu de um desejo profundo: transformar a relação das mulheres com a moda.
-                </p>
-                <p>
-                  Nossa fundadora criou a marca com o intuito de fazer peças exclusivas para cada gosto, fugindo da produção em massa e focando no que realmente importa: a essência de quem veste.
-                </p>
-                <div className="p-8 bg-brand-terracotta/5 rounded-2xl border border-brand-outline/10 italic font-serif text-brand-terracotta">
-                  "Trazer a melhor essência de cada pessoa é o nosso propósito maior."
-                </div>
+    <section className="section-padding bg-brand-cream">
+      <div className="container mx-auto px-6">
+        <div className="mx-auto max-w-4xl">
+          <h4 className="mb-6 text-[0.6rem] font-bold uppercase tracking-[0.3em] text-brand-navy">
+            Nossa historia
+          </h4>
+          <h1 className="mb-12 text-5xl leading-tight md:text-7xl">
+            Momo &amp; Cia: a essencia do <span className="italic">empoderamento</span>
+          </h1>
+
+          <div className="grid grid-cols-1 items-start gap-16 md:grid-cols-2">
+            <div className="space-y-8 text-lg leading-relaxed text-brand-text/80">
+              <p>
+                Fundada em Sao Paulo, a Momo &amp; Cia nasceu do desejo de
+                transformar a relacao das mulheres com a moda por meio de pecas
+                exclusivas e de pouca tiragem.
+              </p>
+              <p>
+                A marca foi criada para oferecer escolhas delicadas, acessiveis
+                e seguras para quem busca autenticidade sem abrir mao de
+                sofisticacao.
+              </p>
+              <div className="rounded-2xl border border-brand-outline/10 bg-brand-terracotta/5 p-8 font-serif italic text-brand-terracotta">
+                "Trazer a melhor essencia de cada pessoa e o nosso proposito
+                maior."
               </div>
-              <div className="space-y-8 text-lg font-light leading-relaxed text-brand-text/80">
-                <p>
-                  Trabalhamos com coleções limitadas e poucas peças por modelo. Isso garante que sua escolha seja única, assim como sua trajetória.
-                </p>
-                <p>
-                  Para nós, luxo é autenticidade. É autoestima. É o poder que cada um tem dentro de si e que floresce quando nos sentimos bem com o que vestimos.
-                </p>
-                <p className="font-bold text-brand-navy uppercase text-xs tracking-widest mt-8">
-                  Autenticidade • Dedicação • Autoestima
-                </p>
-              </div>
+            </div>
+
+            <div className="space-y-8 text-lg leading-relaxed text-brand-text/80">
+              <p>
+                Trabalhamos com colecoes limitadas, poucas pecas por modelo e
+                um olhar atento para caimento, cor e presenca visual.
+              </p>
+              <p>
+                Para nos, luxo e autenticidade. E autoestima. E o poder que
+                floresce quando a mulher se reconhece no que veste.
+              </p>
+              <p className="mt-8 text-xs font-bold uppercase tracking-widest text-brand-navy">
+                Autenticidade • Dedicacao • Autoestima
+              </p>
             </div>
           </div>
         </div>
-      </section>
-    </div>
+      </div>
+    </section>
   );
 }

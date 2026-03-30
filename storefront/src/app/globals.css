@@ -42,3 +42,9 @@
     @apply py-20 md:py-32;
   }
 }
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}

@@ -1,0 +1,771 @@
+{
+  "sourceSystem": "medusa",
+  "currency": "brl",
+  "exportedAt": "2026-03-29T12:00:00-03:00",
+  "categories": [
+    {
+      "name": "Vestidos",
+      "handle": "vestidos",
+      "description": "Vestidos com caimento leve, elegancia acessivel e presenca editorial."
+    },
+    {
+      "name": "Blusas",
+      "handle": "blusas",
+      "description": "Blusas femininas para composicoes delicadas, urbanas e atemporais."
+    },
+    {
+      "name": "Saias",
+      "handle": "saias",
+      "description": "Saias com movimento suave, acabamento sofisticado e uso versatil."
+    },
+    {
+      "name": "Conjuntos",
+      "handle": "conjuntos",
+      "description": "Conjuntos coordenados para uma vitrine elegante e pronta para vender."
+    },
+    {
+      "name": "Alfaiataria",
+      "handle": "alfaiataria",
+      "description": "Pecas de alfaiataria leve para um visual feminino e autoral."
+    }
+  ],
+  "collections": [
+    {
+      "title": "Essencia Terracota",
+      "handle": "essencia-terracota",
+      "description": "Pecas quentes, femininas e acolhedoras, guiadas pela paleta central da marca."
+    },
+    {
+      "title": "Horizonte Urbano",
+      "handle": "horizonte-urbano",
+      "description": "Silhuetas urbanas em azul marinho, creme e linhas mais retas."
+    },
+    {
+      "title": "Aura Atemporal",
+      "handle": "aura-atemporal",
+      "description": "Curadoria de pecas delicadas para uma mulher que busca leveza e autenticidade."
+    }
+  ],
+  "products": [
+    {
+      "id": "medusa_001",
+      "title": "Vestido Aurora Terracota",
+      "description": "Vestido midi de presenca suave, com cintura marcada e fluidez pensada para dias especiais e encontros leves.",
+      "handle": "vestido-aurora-terracota",
+      "status": "published",
+      "thumbnail": "https://images.unsplash.com/photo-1496747611176-843222e1e57c?auto=format&fit=crop&w=1200&q=80",
+      "images": [
+        {
+          "url": "https://images.unsplash.com/photo-1496747611176-843222e1e57c?auto=format&fit=crop&w=1200&q=80",
+          "alt": "Vestido Aurora Terracota"
+        }
+      ],
+      "collection": {
+        "title": "Essencia Terracota",
+        "handle": "essencia-terracota"
+      },
+      "categories": [
+        {
+          "name": "Vestidos",
+          "handle": "vestidos"
+        }
+      ],
+      "options": [
+        {
+          "title": "Tamanho",
+          "values": ["P", "M", "G"]
+        },
+        {
+          "title": "Cor",
+          "values": ["Terracota"]
+        }
+      ],
+      "variants": [
+        {
+          "id": "medusa_001_var_p",
+          "title": "P / Terracota",
+          "sku": "AURORA-TERRACOTA-P",
+          "prices": [{ "currency_code": "brl", "amount": 28900 }],
+          "options": { "Tamanho": "P", "Cor": "Terracota" }
+        },
+        {
+          "id": "medusa_001_var_m",
+          "title": "M / Terracota",
+          "sku": "AURORA-TERRACOTA-M",
+          "prices": [{ "currency_code": "brl", "amount": 28900 }],
+          "options": { "Tamanho": "M", "Cor": "Terracota" }
+        },
+        {
+          "id": "medusa_001_var_g",
+          "title": "G / Terracota",
+          "sku": "AURORA-TERRACOTA-G",
+          "prices": [{ "currency_code": "brl", "amount": 28900 }],
+          "options": { "Tamanho": "G", "Cor": "Terracota" }
+        }
+      ]
+    },
+    {
+      "id": "medusa_002",
+      "title": "Vestido Serena Midi",
+      "description": "Vestido midi com decote delicado e desenho pensado para um guarda-roupa elegante, romantico e facil de usar.",
+      "handle": "vestido-serena-midi",
+      "status": "published",
+      "thumbnail": "https://images.unsplash.com/photo-1529139574466-a303027c1d8b?auto=format&fit=crop&w=1200&q=80",
+      "images": [
+        {
+          "url": "https://images.unsplash.com/photo-1529139574466-a303027c1d8b?auto=format&fit=crop&w=1200&q=80",
+          "alt": "Vestido Serena Midi"
+        }
+      ],
+      "collection": {
+        "title": "Aura Atemporal",
+        "handle": "aura-atemporal"
+      },
+      "categories": [
+        {
+          "name": "Vestidos",
+          "handle": "vestidos"
+        }
+      ],
+      "options": [
+        { "title": "Tamanho", "values": ["P", "M", "G"] },
+        { "title": "Cor", "values": ["Areia"] }
+      ],
+      "variants": [
+        {
+          "id": "medusa_002_var_p",
+          "title": "P / Areia",
+          "sku": "SERENA-AREIA-P",
+          "prices": [{ "currency_code": "brl", "amount": 31900 }],
+          "options": { "Tamanho": "P", "Cor": "Areia" }
+        },
+        {
+          "id": "medusa_002_var_m",
+          "title": "M / Areia",
+          "sku": "SERENA-AREIA-M",
+          "prices": [{ "currency_code": "brl", "amount": 31900 }],
+          "options": { "Tamanho": "M", "Cor": "Areia" }
+        },
+        {
+          "id": "medusa_002_var_g",
+          "title": "G / Areia",
+          "sku": "SERENA-AREIA-G",
+          "prices": [{ "currency_code": "brl", "amount": 31900 }],
+          "options": { "Tamanho": "G", "Cor": "Areia" }
+        }
+      ]
+    },
+    {
+      "id": "medusa_003",
+      "title": "Vestido Marina Envelope",
+      "description": "Vestido envelope com movimento leve e visual marcante para uma mulher segura, delicada e urbana.",
+      "handle": "vestido-marina-envelope",
+      "status": "published",
+      "thumbnail": "https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&w=1200&q=80",
+      "images": [
+        {
+          "url": "https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&w=1200&q=80",
+          "alt": "Vestido Marina Envelope"
+        }
+      ],
+      "collection": {
+        "title": "Horizonte Urbano",
+        "handle": "horizonte-urbano"
+      },
+      "categories": [
+        {
+          "name": "Vestidos",
+          "handle": "vestidos"
+        }
+      ],
+      "options": [
+        { "title": "Tamanho", "values": ["P", "M", "G"] },
+        { "title": "Cor", "values": ["Marinho"] }
+      ],
+      "variants": [
+        {
+          "id": "medusa_003_var_p",
+          "title": "P / Marinho",
+          "sku": "MARINA-MARINHO-P",
+          "prices": [{ "currency_code": "brl", "amount": 33900 }],
+          "options": { "Tamanho": "P", "Cor": "Marinho" }
+        },
+        {
+          "id": "medusa_003_var_m",
+          "title": "M / Marinho",
+          "sku": "MARINA-MARINHO-M",
+          "prices": [{ "currency_code": "brl", "amount": 33900 }],
+          "options": { "Tamanho": "M", "Cor": "Marinho" }
+        },
+        {
+          "id": "medusa_003_var_g",
+          "title": "G / Marinho",
+          "sku": "MARINA-MARINHO-G",
+          "prices": [{ "currency_code": "brl", "amount": 33900 }],
+          "options": { "Tamanho": "G", "Cor": "Marinho" }
+        }
+      ]
+    },
+    {
+      "id": "medusa_004",
+      "title": "Blusa Alma Off White",
+      "description": "Blusa feminina com toque leve e shape limpo para combinar com saias, calcas e conjuntos da marca.",
+      "handle": "blusa-alma-off-white",
+      "status": "published",
+      "thumbnail": "https://images.unsplash.com/photo-1483985988355-763728e1935b?auto=format&fit=crop&w=1200&q=80",
+      "images": [
+        {
+          "url": "https://images.unsplash.com/photo-1483985988355-763728e1935b?auto=format&fit=crop&w=1200&q=80",
+          "alt": "Blusa Alma Off White"
+        }
+      ],
+      "collection": {
+        "title": "Aura Atemporal",
+        "handle": "aura-atemporal"
+      },
+      "categories": [
+        {
+          "name": "Blusas",
+          "handle": "blusas"
+        }
+      ],
+      "options": [
+        { "title": "Tamanho", "values": ["P", "M", "G"] },
+        { "title": "Cor", "values": ["Off White"] }
+      ],
+      "variants": [
+        {
+          "id": "medusa_004_var_p",
+          "title": "P / Off White",
+          "sku": "ALMA-OFFWHITE-P",
+          "prices": [{ "currency_code": "brl", "amount": 14900 }],
+          "options": { "Tamanho": "P", "Cor": "Off White" }
+        },
+        {
+          "id": "medusa_004_var_m",
+          "title": "M / Off White",
+          "sku": "ALMA-OFFWHITE-M",
+          "prices": [{ "currency_code": "brl", "amount": 14900 }],
+          "options": { "Tamanho": "M", "Cor": "Off White" }
+        },
+        {
+          "id": "medusa_004_var_g",
+          "title": "G / Off White",
+          "sku": "ALMA-OFFWHITE-G",
+          "prices": [{ "currency_code": "brl", "amount": 14900 }],
+          "options": { "Tamanho": "G", "Cor": "Off White" }
+        }
+      ]
+    },
+    {
+      "id": "medusa_005",
+      "title": "Blusa Horizonte Marinho",
+      "description": "Blusa de visual contemporaneo, gola elegante e acabamento limpo para um estilo leve e seguro.",
+      "handle": "blusa-horizonte-marinho",
+      "status": "published",
+      "thumbnail": "https://images.unsplash.com/photo-1495385794356-15371f348c31?auto=format&fit=crop&w=1200&q=80",
+      "images": [
+        {
+          "url": "https://images.unsplash.com/photo-1495385794356-15371f348c31?auto=format&fit=crop&w=1200&q=80",
+          "alt": "Blusa Horizonte Marinho"
+        }
+      ],
+      "collection": {
+        "title": "Horizonte Urbano",
+        "handle": "horizonte-urbano"
+      },
+      "categories": [
+        {
+          "name": "Blusas",
+          "handle": "blusas"
+        }
+      ],
+      "options": [
+        { "title": "Tamanho", "values": ["P", "M", "G"] },
+        { "title": "Cor", "values": ["Marinho"] }
+      ],
+      "variants": [
+        {
+          "id": "medusa_005_var_p",
+          "title": "P / Marinho",
+          "sku": "HORIZONTE-MARINHO-P",
+          "prices": [{ "currency_code": "brl", "amount": 15900 }],
+          "options": { "Tamanho": "P", "Cor": "Marinho" }
+        },
+        {
+          "id": "medusa_005_var_m",
+          "title": "M / Marinho",
+          "sku": "HORIZONTE-MARINHO-M",
+          "prices": [{ "currency_code": "brl", "amount": 15900 }],
+          "options": { "Tamanho": "M", "Cor": "Marinho" }
+        },
+        {
+          "id": "medusa_005_var_g",
+          "title": "G / Marinho",
+          "sku": "HORIZONTE-MARINHO-G",
+          "prices": [{ "currency_code": "brl", "amount": 15900 }],
+          "options": { "Tamanho": "G", "Cor": "Marinho" }
+        }
+      ]
+    },
+    {
+      "id": "medusa_006",
+      "title": "Camisa Brisa Acetinada",
+      "description": "Camisa feminina com brilho suave e recorte delicado para looks leves, sofisticados e faceis de compor.",
+      "handle": "camisa-brisa-acetinada",
+      "status": "published",
+      "thumbnail": "https://images.unsplash.com/photo-1515372039744-b8f02a3ae446?auto=format&fit=crop&w=1200&q=80",
+      "images": [
+        {
+          "url": "https://images.unsplash.com/photo-1515372039744-b8f02a3ae446?auto=format&fit=crop&w=1200&q=80",
+          "alt": "Camisa Brisa Acetinada"
+        }
+      ],
+      "collection": {
+        "title": "Aura Atemporal",
+        "handle": "aura-atemporal"
+      },
+      "categories": [
+        {
+          "name": "Blusas",
+          "handle": "blusas"
+        }
+      ],
+      "options": [
+        { "title": "Tamanho", "values": ["P", "M", "G"] },
+        { "title": "Cor", "values": ["Champagne"] }
+      ],
+      "variants": [
+        {
+          "id": "medusa_006_var_p",
+          "title": "P / Champagne",
+          "sku": "BRISA-CHAMPAGNE-P",
+          "prices": [{ "currency_code": "brl", "amount": 18900 }],
+          "options": { "Tamanho": "P", "Cor": "Champagne" }
+        },
+        {
+          "id": "medusa_006_var_m",
+          "title": "M / Champagne",
+          "sku": "BRISA-CHAMPAGNE-M",
+          "prices": [{ "currency_code": "brl", "amount": 18900 }],
+          "options": { "Tamanho": "M", "Cor": "Champagne" }
+        },
+        {
+          "id": "medusa_006_var_g",
+          "title": "G / Champagne",
+          "sku": "BRISA-CHAMPAGNE-G",
+          "prices": [{ "currency_code": "brl", "amount": 18900 }],
+          "options": { "Tamanho": "G", "Cor": "Champagne" }
+        }
+      ]
+    },
+    {
+      "id": "medusa_007",
+      "title": "Saia Essencia Midi",
+      "description": "Saia midi com cintura confortavel e desenho fluido para looks femininos com acabamento refinado.",
+      "handle": "saia-essencia-midi",
+      "status": "published",
+      "thumbnail": "https://images.unsplash.com/photo-1551232864-3f0890e580d9?auto=format&fit=crop&w=1200&q=80",
+      "images": [
+        {
+          "url": "https://images.unsplash.com/photo-1551232864-3f0890e580d9?auto=format&fit=crop&w=1200&q=80",
+          "alt": "Saia Essencia Midi"
+        }
+      ],
+      "collection": {
+        "title": "Essencia Terracota",
+        "handle": "essencia-terracota"
+      },
+      "categories": [
+        {
+          "name": "Saias",
+          "handle": "saias"
+        }
+      ],
+      "options": [
+        { "title": "Tamanho", "values": ["P", "M", "G"] },
+        { "title": "Cor", "values": ["Terracota"] }
+      ],
+      "variants": [
+        {
+          "id": "medusa_007_var_p",
+          "title": "P / Terracota",
+          "sku": "ESSENCIA-TERRACOTA-P",
+          "prices": [{ "currency_code": "brl", "amount": 17900 }],
+          "options": { "Tamanho": "P", "Cor": "Terracota" }
+        },
+        {
+          "id": "medusa_007_var_m",
+          "title": "M / Terracota",
+          "sku": "ESSENCIA-TERRACOTA-M",
+          "prices": [{ "currency_code": "brl", "amount": 17900 }],
+          "options": { "Tamanho": "M", "Cor": "Terracota" }
+        },
+        {
+          "id": "medusa_007_var_g",
+          "title": "G / Terracota",
+          "sku": "ESSENCIA-TERRACOTA-G",
+          "prices": [{ "currency_code": "brl", "amount": 17900 }],
+          "options": { "Tamanho": "G", "Cor": "Terracota" }
+        }
+      ]
+    },
+    {
+      "id": "medusa_008",
+      "title": "Saia Luar Plissada",
+      "description": "Saia plissada com brilho discreto e silhueta elegante para compor a vitrine com movimento e leveza.",
+      "handle": "saia-luar-plissada",
+      "status": "published",
+      "thumbnail": "https://images.unsplash.com/photo-1539008835657-9e8e9680c956?auto=format&fit=crop&w=1200&q=80",
+      "images": [
+        {
+          "url": "https://images.unsplash.com/photo-1539008835657-9e8e9680c956?auto=format&fit=crop&w=1200&q=80",
+          "alt": "Saia Luar Plissada"
+        }
+      ],
+      "collection": {
+        "title": "Aura Atemporal",
+        "handle": "aura-atemporal"
+      },
+      "categories": [
+        {
+          "name": "Saias",
+          "handle": "saias"
+        }
+      ],
+      "options": [
+        { "title": "Tamanho", "values": ["P", "M", "G"] },
+        { "title": "Cor", "values": ["Champagne"] }
+      ],
+      "variants": [
+        {
+          "id": "medusa_008_var_p",
+          "title": "P / Champagne",
+          "sku": "LUAR-CHAMPAGNE-P",
+          "prices": [{ "currency_code": "brl", "amount": 19900 }],
+          "options": { "Tamanho": "P", "Cor": "Champagne" }
+        },
+        {
+          "id": "medusa_008_var_m",
+          "title": "M / Champagne",
+          "sku": "LUAR-CHAMPAGNE-M",
+          "prices": [{ "currency_code": "brl", "amount": 19900 }],
+          "options": { "Tamanho": "M", "Cor": "Champagne" }
+        },
+        {
+          "id": "medusa_008_var_g",
+          "title": "G / Champagne",
+          "sku": "LUAR-CHAMPAGNE-G",
+          "prices": [{ "currency_code": "brl", "amount": 19900 }],
+          "options": { "Tamanho": "G", "Cor": "Champagne" }
+        }
+      ]
+    },
+    {
+      "id": "medusa_009",
+      "title": "Conjunto Terracota Clara",
+      "description": "Conjunto feminino de linhas suaves para uma producao pronta, acolhedora e elegante na vitrine.",
+      "handle": "conjunto-terracota-clara",
+      "status": "published",
+      "thumbnail": "https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=1200&q=80",
+      "images": [
+        {
+          "url": "https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=1200&q=80",
+          "alt": "Conjunto Terracota Clara"
+        }
+      ],
+      "collection": {
+        "title": "Essencia Terracota",
+        "handle": "essencia-terracota"
+      },
+      "categories": [
+        {
+          "name": "Conjuntos",
+          "handle": "conjuntos"
+        }
+      ],
+      "options": [
+        { "title": "Tamanho", "values": ["P", "M", "G"] },
+        { "title": "Cor", "values": ["Terracota"] }
+      ],
+      "variants": [
+        {
+          "id": "medusa_009_var_p",
+          "title": "P / Terracota",
+          "sku": "TERRACOTA-CLARA-P",
+          "prices": [{ "currency_code": "brl", "amount": 32900 }],
+          "options": { "Tamanho": "P", "Cor": "Terracota" }
+        },
+        {
+          "id": "medusa_009_var_m",
+          "title": "M / Terracota",
+          "sku": "TERRACOTA-CLARA-M",
+          "prices": [{ "currency_code": "brl", "amount": 32900 }],
+          "options": { "Tamanho": "M", "Cor": "Terracota" }
+        },
+        {
+          "id": "medusa_009_var_g",
+          "title": "G / Terracota",
+          "sku": "TERRACOTA-CLARA-G",
+          "prices": [{ "currency_code": "brl", "amount": 32900 }],
+          "options": { "Tamanho": "G", "Cor": "Terracota" }
+        }
+      ]
+    },
+    {
+      "id": "medusa_010",
+      "title": "Conjunto Linha Serena",
+      "description": "Conjunto de visual limpo e feminino, pensado para quem quer praticidade com acabamento sofisticado.",
+      "handle": "conjunto-linha-serena",
+      "status": "published",
+      "thumbnail": "https://images.unsplash.com/photo-1541099649105-f69ad21f3246?auto=format&fit=crop&w=1200&q=80",
+      "images": [
+        {
+          "url": "https://images.unsplash.com/photo-1541099649105-f69ad21f3246?auto=format&fit=crop&w=1200&q=80",
+          "alt": "Conjunto Linha Serena"
+        }
+      ],
+      "collection": {
+        "title": "Aura Atemporal",
+        "handle": "aura-atemporal"
+      },
+      "categories": [
+        {
+          "name": "Conjuntos",
+          "handle": "conjuntos"
+        }
+      ],
+      "options": [
+        { "title": "Tamanho", "values": ["P", "M", "G"] },
+        { "title": "Cor", "values": ["Creme"] }
+      ],
+      "variants": [
+        {
+          "id": "medusa_010_var_p",
+          "title": "P / Creme",
+          "sku": "LINHA-SERENA-P",
+          "prices": [{ "currency_code": "brl", "amount": 35900 }],
+          "options": { "Tamanho": "P", "Cor": "Creme" }
+        },
+        {
+          "id": "medusa_010_var_m",
+          "title": "M / Creme",
+          "sku": "LINHA-SERENA-M",
+          "prices": [{ "currency_code": "brl", "amount": 35900 }],
+          "options": { "Tamanho": "M", "Cor": "Creme" }
+        },
+        {
+          "id": "medusa_010_var_g",
+          "title": "G / Creme",
+          "sku": "LINHA-SERENA-G",
+          "prices": [{ "currency_code": "brl", "amount": 35900 }],
+          "options": { "Tamanho": "G", "Cor": "Creme" }
+        }
+      ]
+    },
+    {
+      "id": "medusa_011",
+      "title": "Macacao Encontro Marinho",
+      "description": "Macacao feminino de linha reta e visual refinado, pronto para elevar a pagina de produto e a vitrine principal.",
+      "handle": "macacao-encontro-marinho",
+      "status": "published",
+      "thumbnail": "https://images.unsplash.com/photo-1512436991641-6745cdb1723f?auto=format&fit=crop&w=1200&q=80",
+      "images": [
+        {
+          "url": "https://images.unsplash.com/photo-1512436991641-6745cdb1723f?auto=format&fit=crop&w=1200&q=80",
+          "alt": "Macacao Encontro Marinho"
+        }
+      ],
+      "collection": {
+        "title": "Horizonte Urbano",
+        "handle": "horizonte-urbano"
+      },
+      "categories": [
+        {
+          "name": "Alfaiataria",
+          "handle": "alfaiataria"
+        }
+      ],
+      "options": [
+        { "title": "Tamanho", "values": ["P", "M", "G"] },
+        { "title": "Cor", "values": ["Marinho"] }
+      ],
+      "variants": [
+        {
+          "id": "medusa_011_var_p",
+          "title": "P / Marinho",
+          "sku": "ENCONTRO-MARINHO-P",
+          "prices": [{ "currency_code": "brl", "amount": 36900 }],
+          "options": { "Tamanho": "P", "Cor": "Marinho" }
+        },
+        {
+          "id": "medusa_011_var_m",
+          "title": "M / Marinho",
+          "sku": "ENCONTRO-MARINHO-M",
+          "prices": [{ "currency_code": "brl", "amount": 36900 }],
+          "options": { "Tamanho": "M", "Cor": "Marinho" }
+        },
+        {
+          "id": "medusa_011_var_g",
+          "title": "G / Marinho",
+          "sku": "ENCONTRO-MARINHO-G",
+          "prices": [{ "currency_code": "brl", "amount": 36900 }],
+          "options": { "Tamanho": "G", "Cor": "Marinho" }
+        }
+      ]
+    },
+    {
+      "id": "medusa_012",
+      "title": "Blazer Presenca Marinho",
+      "description": "Blazer leve com corte limpo e presenca forte para compor a parte premium da colecao feminina.",
+      "handle": "blazer-presenca-marinho",
+      "status": "published",
+      "thumbnail": "https://images.unsplash.com/photo-1485230895905-ec40ba36b9bc?auto=format&fit=crop&w=1200&q=80",
+      "images": [
+        {
+          "url": "https://images.unsplash.com/photo-1485230895905-ec40ba36b9bc?auto=format&fit=crop&w=1200&q=80",
+          "alt": "Blazer Presenca Marinho"
+        }
+      ],
+      "collection": {
+        "title": "Horizonte Urbano",
+        "handle": "horizonte-urbano"
+      },
+      "categories": [
+        {
+          "name": "Alfaiataria",
+          "handle": "alfaiataria"
+        }
+      ],
+      "options": [
+        { "title": "Tamanho", "values": ["P", "M", "G"] },
+        { "title": "Cor", "values": ["Marinho"] }
+      ],
+      "variants": [
+        {
+          "id": "medusa_012_var_p",
+          "title": "P / Marinho",
+          "sku": "PRESENCA-MARINHO-P",
+          "prices": [{ "currency_code": "brl", "amount": 34900 }],
+          "options": { "Tamanho": "P", "Cor": "Marinho" }
+        },
+        {
+          "id": "medusa_012_var_m",
+          "title": "M / Marinho",
+          "sku": "PRESENCA-MARINHO-M",
+          "prices": [{ "currency_code": "brl", "amount": 34900 }],
+          "options": { "Tamanho": "M", "Cor": "Marinho" }
+        },
+        {
+          "id": "medusa_012_var_g",
+          "title": "G / Marinho",
+          "sku": "PRESENCA-MARINHO-G",
+          "prices": [{ "currency_code": "brl", "amount": 34900 }],
+          "options": { "Tamanho": "G", "Cor": "Marinho" }
+        }
+      ]
+    },
+    {
+      "id": "medusa_013",
+      "title": "Calca Traco Reto Creme",
+      "description": "Calca de alfaiataria leve com cintura alta e visual limpo para coordenar com blusas, camisas e blazers.",
+      "handle": "calca-traco-reto-creme",
+      "status": "published",
+      "thumbnail": "https://images.unsplash.com/photo-1544441893-675973e31985?auto=format&fit=crop&w=1200&q=80",
+      "images": [
+        {
+          "url": "https://images.unsplash.com/photo-1544441893-675973e31985?auto=format&fit=crop&w=1200&q=80",
+          "alt": "Calca Traco Reto Creme"
+        }
+      ],
+      "collection": {
+        "title": "Horizonte Urbano",
+        "handle": "horizonte-urbano"
+      },
+      "categories": [
+        {
+          "name": "Alfaiataria",
+          "handle": "alfaiataria"
+        }
+      ],
+      "options": [
+        { "title": "Tamanho", "values": ["P", "M", "G"] },
+        { "title": "Cor", "values": ["Creme"] }
+      ],
+      "variants": [
+        {
+          "id": "medusa_013_var_p",
+          "title": "P / Creme",
+          "sku": "TRACO-RETO-P",
+          "prices": [{ "currency_code": "brl", "amount": 21900 }],
+          "options": { "Tamanho": "P", "Cor": "Creme" }
+        },
+        {
+          "id": "medusa_013_var_m",
+          "title": "M / Creme",
+          "sku": "TRACO-RETO-M",
+          "prices": [{ "currency_code": "brl", "amount": 21900 }],
+          "options": { "Tamanho": "M", "Cor": "Creme" }
+        },
+        {
+          "id": "medusa_013_var_g",
+          "title": "G / Creme",
+          "sku": "TRACO-RETO-G",
+          "prices": [{ "currency_code": "brl", "amount": 21900 }],
+          "options": { "Tamanho": "G", "Cor": "Creme" }
+        }
+      ]
+    },
+    {
+      "id": "medusa_014",
+      "title": "Colete Aura Estruturado",
+      "description": "Colete estruturado para compor producoes atemporais com leve sofisticao e leitura contemporanea.",
+      "handle": "colete-aura-estruturado",
+      "status": "published",
+      "thumbnail": "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?auto=format&fit=crop&w=1200&q=80",
+      "images": [
+        {
+          "url": "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?auto=format&fit=crop&w=1200&q=80",
+          "alt": "Colete Aura Estruturado"
+        }
+      ],
+      "collection": {
+        "title": "Aura Atemporal",
+        "handle": "aura-atemporal"
+      },
+      "categories": [
+        {
+          "name": "Alfaiataria",
+          "handle": "alfaiataria"
+        }
+      ],
+      "options": [
+        { "title": "Tamanho", "values": ["P", "M", "G"] },
+        { "title": "Cor", "values": ["Creme"] }
+      ],
+      "variants": [
+        {
+          "id": "medusa_014_var_p",
+          "title": "P / Creme",
+          "sku": "AURA-ESTRUTURADO-P",
+          "prices": [{ "currency_code": "brl", "amount": 16900 }],
+          "options": { "Tamanho": "P", "Cor": "Creme" }
+        },
+        {
+          "id": "medusa_014_var_m",
+          "title": "M / Creme",
+          "sku": "AURA-ESTRUTURADO-M",
+          "prices": [{ "currency_code": "brl", "amount": 16900 }],
+          "options": { "Tamanho": "M", "Cor": "Creme" }
+        },
+        {
+          "id": "medusa_014_var_g",
+          "title": "G / Creme",
+          "sku": "AURA-ESTRUTURADO-G",
+          "prices": [{ "currency_code": "brl", "amount": 16900 }],
+          "options": { "Tamanho": "G", "Cor": "Creme" }
+        }
+      ]
+    }
+  ]
+}

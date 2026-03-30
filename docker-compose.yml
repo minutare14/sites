@@ -1,73 +1,97 @@
 services:
-  postgres:
-    image: postgres:15
-    environment:
-      POSTGRES_USER: medusa
-      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
-      POSTGRES_DB: medusa_db
+  gateway:
+    image: nginx:1.27-alpine
+    depends_on:
+      saleor-api:
+        condition: service_started
+      saleor-dashboard:
+        condition: service_started
+    ports:
+      - "8100:80"
     volumes:
-      - postgres_data:/var/lib/postgresql/data
+      - ./infra/nginx/saleor.conf:/etc/nginx/conf.d/default.conf:ro
+
+  saleor-db:
+    image: postgres:15-alpine
+    environment:
+      POSTGRES_USER: saleor
+      POSTGRES_PASSWORD: saleor
+      POSTGRES_DB: saleor
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U medusa -d medusa_db"]
+      test: ["CMD-SHELL", "pg_isready -U saleor -d saleor"]
       interval: 5s
       timeout: 5s
-      retries: 5
+      retries: 10
+    volumes:
+      - saleor_db_data:/var/lib/postgresql/data
 
-  redis:
-    image: redis:latest
+  saleor-cache:
+    image: valkey/valkey:8.1-alpine
+    command: ["valkey-server", "--save", "", "--appendonly", "no"]
+    volumes:
+      - saleor_cache_data:/data
 
-  backend:
-    build:
-      context: ./backend
-      dockerfile: Dockerfile
-    environment:
-      - DATABASE_URL=postgres://medusa:${POSTGRES_PASSWORD}@postgres:5432/medusa_db
-      - REDIS_URL=redis://redis:6379
-      - STORE_CORS=https://momo.minutarecore.space
-      - ADMIN_CORS=https://api.momo.minutarecore.space
-      - AUTH_CORS=https://api.momo.minutarecore.space
-      - JWT_SECRET=${JWT_SECRET}
-      - COOKIE_SECRET=${COOKIE_SECRET}
+  mailpit:
+    image: axllent/mailpit
     ports:
-      - "9000:9000"
+      - "8025:8025"
+
+  saleor-api:
+    image: ghcr.io/saleor/saleor:3.22
     depends_on:
-      postgres:
+      saleor-db:
         condition: service_healthy
-      redis:
+      saleor-cache:
         condition: service_started
-    networks:
-      - dokploy-network
-      - default
-    labels:
-      - "traefik.enable=true"
-      - "traefik.http.routers.momo-backend.rule=Host(`api.momo.minutarecore.space`)"
-      - "traefik.http.routers.momo-backend.entrypoints=web,websecure"
-      - "traefik.http.routers.momo-backend.tls.certresolver=letsencrypt"
-      - "traefik.http.services.momo-backend.loadbalancer.server.port=9000"
+      mailpit:
+        condition: service_started
+    env_file:
+      - ./saleor/common.env
+      - ./saleor/backend.env
+    environment:
+      ALLOWED_HOSTS: localhost,127.0.0.1,gateway,saleor-api
+      DASHBOARD_URL: http://localhost:8100/app/
+    volumes:
+      - saleor_media:/app/media
+
+  saleor-worker:
+    image: ghcr.io/saleor/saleor:3.22
+    command: celery -A saleor --app=saleor.celeryconf:app worker --loglevel=info -B
+    depends_on:
+      saleor-db:
+        condition: service_healthy
+      saleor-cache:
+        condition: service_started
+      mailpit:
+        condition: service_started
+    env_file:
+      - ./saleor/common.env
+      - ./saleor/backend.env
+    volumes:
+      - saleor_media:/app/media
+
+  saleor-dashboard:
+    image: ghcr.io/saleor/saleor-dashboard:latest
+    env_file:
+      - ./saleor/dashboard.env
 
   storefront:
     build:
       context: ./storefront
       dockerfile: Dockerfile
-      args:
-        NEXT_PUBLIC_MEDUSA_BACKEND_URL: https://api.momo.minutarecore.space
-    ports:
-      - "3344:3000"
     depends_on:
-      - backend
-    networks:
-      - dokploy-network
-      - default
-    labels:
-      - "traefik.enable=true"
-      - "traefik.http.routers.momo-storefront.rule=Host(`momo.minutarecore.space`)"
-      - "traefik.http.routers.momo-storefront.entrypoints=web,websecure"
-      - "traefik.http.routers.momo-storefront.tls.certresolver=letsencrypt"
-      - "traefik.http.services.momo-storefront.loadbalancer.server.port=3000"
-
-networks:
-  dokploy-network:
-    external: true
+      gateway:
+        condition: service_started
+    environment:
+      NODE_ENV: production
+      SALEOR_API_URL: http://gateway/graphql/
+      SALEOR_CHANNEL_SLUG: momo-br
+      SALEOR_MEDIA_BASE_URL: http://localhost:8100/
+      NEXT_PUBLIC_SALEOR_DASHBOARD_URL: http://localhost:8100/app/
+    ports:
+      - "3300:3000"
 
 volumes:
-  postgres_data:
+  saleor_db_data:
+  saleor_cache_data:
+  saleor_media:

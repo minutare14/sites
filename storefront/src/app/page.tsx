@@ -1,85 +1,121 @@
-import Navbar from "@/components/Navbar";
+import Link from "next/link";
 import Hero from "@/components/Hero";
+import ProductCard from "@/components/ProductCard";
+import { getCollections, getProducts } from "@/lib/saleor/client";
 
-export default function HomePage() {
+export const dynamic = "force-dynamic";
+
+export default async function HomePage() {
+  const [products, collections] = await Promise.all([
+    getProducts({ first: 4 }),
+    getCollections({ first: 3 }),
+  ]);
+
   return (
     <div className="flex flex-col">
-      <Navbar />
       <Hero />
 
-      {/* Featured Collection - Grid Section */}
       <section className="section-padding bg-brand-cream-dark/20 font-sans">
         <div className="container mx-auto px-6">
-          <div className="flex flex-col md:flex-row justify-between items-end mb-16 gap-4">
+          <div className="mb-16 flex flex-col items-start justify-between gap-4 md:flex-row md:items-end">
             <div>
-              <h4 className="uppercase text-[0.6rem] tracking-[0.3em] font-bold text-brand-navy mb-4">Exclusividade</h4>
-              <h2 className="text-4xl md:text-5xl font-serif">Coleção Limitada</h2>
+              <h4 className="mb-4 text-[0.6rem] font-bold uppercase tracking-[0.3em] text-brand-navy">
+                Catalogo real
+              </h4>
+              <h2 className="text-4xl font-serif md:text-5xl">
+                Colecao em destaque
+              </h2>
             </div>
-            <a href="#" className="text-sm font-bold border-b-2 border-brand-terracotta text-brand-terracotta pb-1 hover:opacity-70 transition-opacity">
+            <Link
+              href="/colecao"
+              className="border-b-2 border-brand-terracotta pb-1 text-sm font-bold text-brand-terracotta transition-opacity hover:opacity-70"
+            >
               Ver todos os produtos
-            </a>
+            </Link>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
-            {[1, 2, 3, 4].map((i) => (
-              <div key={i} className="group cursor-pointer">
-                <div className="aspect-[3/4] bg-white rounded-lg mb-4 overflow-hidden relative shadow-sm transition-all group-hover:shadow-xl group-hover:-translate-y-1 border border-brand-outline/5">
-                  <div className="absolute inset-0 bg-brand-terracotta/5 group-hover:bg-transparent transition-colors" />
-                  <div className="absolute top-4 right-4 bg-brand-terracotta text-white text-[0.6rem] px-3 py-1 rounded-full uppercase tracking-widest font-bold">
-                    Novo
-                  </div>
-                  <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
-                    <button className="bg-brand-cream text-brand-navy px-6 py-3 rounded-full text-xs font-bold uppercase tracking-widest shadow-lg">
-                      Vista Rápida
-                    </button>
-                  </div>
-                </div>
-                <h3 className="text-lg mb-1 group-hover:text-brand-terracotta transition-colors font-serif">Peça Exclusiva 0{i}</h3>
-                <p className="text-brand-navy font-bold">R$ 289,00</p>
-                <p className="text-[0.6rem] uppercase tracking-widest text-brand-text/40 mt-1">Selo Momo & Cia</p>
-              </div>
+          <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-4">
+            {products.map((product) => (
+              <ProductCard key={product.id} product={product} />
             ))}
           </div>
         </div>
       </section>
 
-      {/* About Section */}
       <section className="section-padding font-sans">
-        <div className="container mx-auto px-6 grid grid-cols-1 md:grid-cols-2 gap-20 items-center">
-          <div className="relative p-12 order-2 md:order-1">
-             <div className="absolute top-0 right-0 w-full h-full bg-brand-terracotta/5 rounded-3xl -rotate-3" />
-             <div className="relative aspect-square bg-brand-cream-dark rounded-2xl overflow-hidden shadow-2xl border border-brand-outline/10">
-                <div className="absolute inset-0 flex items-center justify-center text-brand-terracotta/10 text-9xl font-serif italic select-none">M</div>
-             </div>
+        <div className="container mx-auto grid grid-cols-1 items-center gap-20 px-6 md:grid-cols-2">
+          <div className="order-2 relative p-12 md:order-1">
+            <div className="absolute top-0 right-0 h-full w-full -rotate-3 rounded-3xl bg-brand-terracotta/5" />
+            <div className="relative rounded-2xl border border-brand-outline/10 bg-brand-cream-dark p-10 shadow-2xl">
+              <h4 className="mb-6 text-[0.6rem] font-bold uppercase tracking-[0.3em] text-brand-navy">
+                Curadoria da marca
+              </h4>
+              <div className="space-y-4">
+                {collections.map((collection) => (
+                  <div
+                    key={collection.id}
+                    className="rounded-2xl border border-brand-outline/10 bg-white/70 p-5"
+                  >
+                    <p className="text-sm font-bold uppercase tracking-[0.2em] text-brand-terracotta">
+                      {collection.name}
+                    </p>
+                    <p className="mt-2 text-sm leading-relaxed text-brand-text/75">
+                      {collection.description ||
+                        "Edicao pensada para mulheres que querem se reencontrar na moda com leveza e autenticidade."}
+                    </p>
+                  </div>
+                ))}
+              </div>
+            </div>
           </div>
+
           <div className="order-1 md:order-2">
-            <h4 className="uppercase text-[0.6rem] tracking-[0.3em] font-bold text-brand-navy mb-4">Nossa Essência</h4>
-            <h2 className="text-4xl md:text-5xl mb-8 leading-tight font-serif">
-              Trazer a melhor versão de cada pessoa através da moda.
+            <h4 className="mb-4 text-[0.6rem] font-bold uppercase tracking-[0.3em] text-brand-navy">
+              Nossa essencia
+            </h4>
+            <h2 className="mb-8 text-4xl leading-tight md:text-5xl">
+              Moda feminina com poucas pecas, muita presenca e elegancia sem
+              excesso.
             </h2>
-            <div className="space-y-6 text-lg font-light leading-relaxed text-brand-text/80">
+            <div className="space-y-6 text-lg leading-relaxed text-brand-text/80">
               <p>
-                A Momo & Cia nasceu em São Paulo com um propósito claro: transformar o vestir em um ato de empoderamento e autodescoberta.
+                A Momo &amp; Cia nasceu em Sao Paulo com o proposito de
+                transformar o vestir em um gesto de autoestima, autenticidade e
+                reencontro.
               </p>
               <p>
-                Acreditamos na exclusividade. Por isso, nossas coleções são limitadas, garantindo que cada peça carregue a autenticidade de quem a veste.
+                O catalogo e vivo, editavel no admin e organizado para a loja
+                parecer real em cada vitrine, pagina de produto e navegacao.
               </p>
             </div>
-            <button className="btn-secondary mt-10">Conheça nosso Propósito</button>
+            <div className="mt-10 flex flex-wrap gap-4">
+              <Link href="/sobre" className="btn-secondary">
+                Conheca nosso proposito
+              </Link>
+              <Link href="/contato" className="btn-primary">
+                Falar no WhatsApp
+              </Link>
+            </div>
           </div>
         </div>
       </section>
 
-      {/* CTA Section */}
-      <section className="section-padding bg-brand-navy text-brand-cream font-sans text-center">
+      <section className="section-padding bg-brand-navy font-sans text-center text-brand-cream">
         <div className="container mx-auto px-6">
-           <h2 className="text-brand-cream text-4xl md:text-6xl mb-8 font-serif">Pronta para se <br /><span className="italic font-serif">reencontar?</span></h2>
-           <p className="text-xl max-w-2xl mx-auto mb-12 opacity-80 font-light leading-relaxed">
-             Explore peças desenhadas com dedicação para elevar sua autoestima e sofisticação.
-           </p>
-           <button className="btn-primary text-brand-navy bg-brand-cream hover:bg-brand-cream/90">
-             Ver Coleção Completa
-           </button>
+          <h2 className="mb-8 text-4xl text-brand-cream md:text-6xl">
+            Pronta para se <br />
+            <span className="italic">reencontrar?</span>
+          </h2>
+          <p className="mx-auto mb-12 max-w-2xl text-xl leading-relaxed opacity-80">
+            Explore pecas desenhadas para elevar sua autoestima, com imagens,
+            precos e variacoes vindos do Saleor de verdade.
+          </p>
+          <Link
+            href="/colecao"
+            className="btn-primary inline-flex bg-brand-cream text-brand-navy hover:bg-brand-cream/90"
+          >
+            Ver colecao completa
+          </Link>
         </div>
       </section>
     </div>
