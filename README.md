@@ -39,6 +39,14 @@ No ambiente local, essa mesma estrutura fica:
 docker compose up -d --build --remove-orphans
 ```
 
+Antes do primeiro boot, copie [`.env.example`](C:\Users\emano\OneDrive\Documentos\Downloads\site_evelyn\.env.example) para `.env` e ajuste:
+
+- credenciais do Postgres (`SALEOR_DB_USER`, `SALEOR_DB_PASSWORD`, `SALEOR_DB_NAME`)
+- `DATABASE_URL`, caso voce prefira sobrescrever a conexao completa em vez de usar os valores acima
+- URLs publicas
+- `SECRET_KEY`
+- admin do Saleor (`DJANGO_SUPERUSER_EMAIL`, `DJANGO_SUPERUSER_PASSWORD`)
+
 ## Preparar banco
 
 ```bash
@@ -48,8 +56,12 @@ docker compose run --rm saleor-api python manage.py migrate
 ## Criar admin
 
 ```bash
-docker compose run --rm -e DJANGO_SUPERUSER_PASSWORD=asd14200 saleor-api python manage.py createsuperuser --email emanoelmcedo@gmail.com --noinput
+docker compose up -d
 ```
+
+O compose agora executa o bootstrap do admin automaticamente no servico `saleor-migrate`, usando `DJANGO_SUPERUSER_EMAIL`, `DJANGO_SUPERUSER_PASSWORD`, `DJANGO_SUPERUSER_FIRST_NAME` e `DJANGO_SUPERUSER_LAST_NAME` definidos no `.env`.
+
+Se voce trocar a senha no `.env` e subir a stack de novo, o bootstrap atualiza a senha do mesmo email.
 
 ## Migrar catalogo do snapshot Medusa para o Saleor
 

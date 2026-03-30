@@ -32,11 +32,11 @@ services:
   saleor-db:
     image: postgres:15-alpine
     environment:
-      POSTGRES_USER: saleor
-      POSTGRES_PASSWORD: saleor
-      POSTGRES_DB: saleor
+      POSTGRES_USER: ${SALEOR_DB_USER:-saleor}
+      POSTGRES_PASSWORD: ${SALEOR_DB_PASSWORD:-saleor}
+      POSTGRES_DB: ${SALEOR_DB_NAME:-saleor}
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U saleor -d saleor"]
+      test: ["CMD-SHELL", "pg_isready -U ${SALEOR_DB_USER:-saleor} -d ${SALEOR_DB_NAME:-saleor}"]
       interval: 5s
       timeout: 5s
       retries: 10
@@ -77,7 +77,7 @@ services:
     environment:
       CACHE_URL: ${CACHE_URL:-redis://saleor-cache:6379/0}
       CELERY_BROKER_URL: ${CELERY_BROKER_URL:-redis://saleor-cache:6379/1}
-      DATABASE_URL: ${DATABASE_URL:-postgres://saleor:saleor@saleor-db/saleor}
+      DATABASE_URL: ${DATABASE_URL:-postgres://${SALEOR_DB_USER:-saleor}:${SALEOR_DB_PASSWORD:-saleor}@saleor-db/${SALEOR_DB_NAME:-saleor}}
       DEFAULT_CHANNEL_SLUG: ${DEFAULT_CHANNEL_SLUG:-momo-br}
       DEFAULT_FROM_EMAIL: ${DEFAULT_FROM_EMAIL:-noreply@momo.local}
       EMAIL_URL: ${EMAIL_URL:-smtp://mailpit:1025}
@@ -100,7 +100,9 @@ services:
 
   saleor-migrate:
     image: ghcr.io/saleor/saleor:3.22
-    command: python manage.py migrate --noinput
+    command: >-
+      sh -c "python manage.py migrate --noinput &&
+      python manage.py shell < /app/bootstrap_saleor_admin.py"
     depends_on:
       saleor-db:
         condition: service_healthy
@@ -114,7 +116,7 @@ services:
     environment:
       CACHE_URL: ${CACHE_URL:-redis://saleor-cache:6379/0}
       CELERY_BROKER_URL: ${CELERY_BROKER_URL:-redis://saleor-cache:6379/1}
-      DATABASE_URL: ${DATABASE_URL:-postgres://saleor:saleor@saleor-db/saleor}
+      DATABASE_URL: ${DATABASE_URL:-postgres://${SALEOR_DB_USER:-saleor}:${SALEOR_DB_PASSWORD:-saleor}@saleor-db/${SALEOR_DB_NAME:-saleor}}
       DEFAULT_CHANNEL_SLUG: ${DEFAULT_CHANNEL_SLUG:-momo-br}
       DEFAULT_FROM_EMAIL: ${DEFAULT_FROM_EMAIL:-noreply@momo.local}
       EMAIL_URL: ${EMAIL_URL:-smtp://mailpit:1025}
@@ -123,7 +125,13 @@ services:
       SECRET_KEY: ${SECRET_KEY:-change-me-for-local-development}
       ALLOWED_HOSTS: ${SALEOR_ALLOWED_HOSTS:-localhost,127.0.0.1,backend,saleor-api,api.momo.minutarecore.space}
       DASHBOARD_URL: ${SALEOR_DASHBOARD_PUBLIC_URL:-http://localhost:8100/app/}
+      DJANGO_SUPERUSER_EMAIL: ${DJANGO_SUPERUSER_EMAIL:-}
+      DJANGO_SUPERUSER_FIRST_NAME: ${DJANGO_SUPERUSER_FIRST_NAME:-}
+      DJANGO_SUPERUSER_LAST_NAME: ${DJANGO_SUPERUSER_LAST_NAME:-}
+      DJANGO_SUPERUSER_PASSWORD: ${DJANGO_SUPERUSER_PASSWORD:-}
       PUBLIC_URL: ${BACKEND_PUBLIC_URL:-http://localhost:8100/}
+    volumes:
+      - ./scripts/bootstrap_saleor_admin.py:/app/bootstrap_saleor_admin.py:ro
     networks:
       - dokploy-network
 
@@ -145,7 +153,7 @@ services:
     environment:
       CACHE_URL: ${CACHE_URL:-redis://saleor-cache:6379/0}
       CELERY_BROKER_URL: ${CELERY_BROKER_URL:-redis://saleor-cache:6379/1}
-      DATABASE_URL: ${DATABASE_URL:-postgres://saleor:saleor@saleor-db/saleor}
+      DATABASE_URL: ${DATABASE_URL:-postgres://${SALEOR_DB_USER:-saleor}:${SALEOR_DB_PASSWORD:-saleor}@saleor-db/${SALEOR_DB_NAME:-saleor}}
       DEFAULT_CHANNEL_SLUG: ${DEFAULT_CHANNEL_SLUG:-momo-br}
       DEFAULT_FROM_EMAIL: ${DEFAULT_FROM_EMAIL:-noreply@momo.local}
       EMAIL_URL: ${EMAIL_URL:-smtp://mailpit:1025}
@@ -184,7 +192,7 @@ services:
     environment:
       NODE_ENV: production
       SALEOR_API_URL: http://backend/graphql/
-      SALEOR_CHANNEL_SLUG: momo-br
+      SALEOR_CHANNEL_SLUG: ${DEFAULT_CHANNEL_SLUG:-momo-br}
       SALEOR_MEDIA_BASE_URL: ${BACKEND_PUBLIC_URL:-http://localhost:8100/}
       NEXT_PUBLIC_SALEOR_DASHBOARD_URL: ${SALEOR_DASHBOARD_PUBLIC_URL:-http://localhost:8100/app/}
     ports:
