@@ -20,12 +20,13 @@ services:
     labels:
       - "traefik.enable=true"
       - "traefik.docker.network=dokploy-network"
-      - "traefik.http.routers.saleor-api.rule=Host(`api.momo.minutarecore.space`)"
-      - "traefik.http.routers.saleor-api.entrypoints=websecure"
-      - "traefik.http.routers.saleor-api.tls.certresolver=letsencrypt"
-      - "traefik.http.services.saleor-api.loadbalancer.server.port=80"
-      - "traefik.http.services.saleor-api.loadbalancer.healthcheck.path=/graphql/"
-      - "traefik.http.services.saleor-api.loadbalancer.healthcheck.interval=10s"
+      - "traefik.http.routers.momo-api.rule=Host(`api.momo.minutarecore.space`)"
+      - "traefik.http.routers.momo-api.entrypoints=websecure"
+      - "traefik.http.routers.momo-api.tls.certresolver=letsencrypt"
+      - "traefik.http.routers.momo-api.service=momo-api"
+      - "traefik.http.services.momo-api.loadbalancer.server.port=80"
+      - "traefik.http.services.momo-api.loadbalancer.healthcheck.path=/graphql/"
+      - "traefik.http.services.momo-api.loadbalancer.healthcheck.interval=10s"
 
   saleor-db:
     image: postgres:15-alpine
@@ -139,10 +140,11 @@ services:
     labels:
       - "traefik.enable=true"
       - "traefik.docker.network=dokploy-network"
-      - "traefik.http.routers.storefront.rule=Host(`momo.minutarecore.space`)"
-      - "traefik.http.routers.storefront.entrypoints=websecure"
-      - "traefik.http.routers.storefront.tls.certresolver=letsencrypt"
-      - "traefik.http.services.storefront.loadbalancer.server.port=3000"
+      - "traefik.http.routers.momo-storefront.rule=Host(`momo.minutarecore.space`)"
+      - "traefik.http.routers.momo-storefront.entrypoints=websecure"
+      - "traefik.http.routers.momo-storefront.tls.certresolver=letsencrypt"
+      - "traefik.http.routers.momo-storefront.service=momo-storefront"
+      - "traefik.http.services.momo-storefront.loadbalancer.server.port=3000"
 
 volumes:
   saleor_db_data:
