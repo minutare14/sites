@@ -1,10 +1,11 @@
 # Momo & Cia: Storefront + Saleor
 
 Esta base foi migrada de Medusa para Saleor mantendo o storefront atual e consolidando a operacao local em um unico `docker-compose.yml`.
+O compose foi ajustado para manter um servico publico chamado `backend`, preservando a compatibilidade com o mapeamento de dominio que o Dokploy ja esperava do projeto anterior.
 
 ## Stack local
 
-- `gateway`: reverse proxy unico da stack local em `http://localhost:8100`
+- `backend`: reverse proxy unico da stack local em `http://localhost:8100`
 - `saleor-api`: GraphQL do Saleor em `http://localhost:8100/graphql/`
 - `saleor-dashboard`: admin do Saleor em `http://localhost:8100/app/`
 - `storefront`: vitrine atual em `http://localhost:3300`
@@ -12,6 +13,13 @@ Esta base foi migrada de Medusa para Saleor mantendo o storefront atual e consol
 - `saleor-cache`: Valkey/Redis
 - `saleor-worker`: background worker do Saleor
 - `mailpit`: inbox SMTP local em `http://localhost:8025`
+
+## Regra de dominio
+
+- `momo.minutarecore.space` -> servico `storefront`
+- `api.momo.minutarecore.space` -> servico `backend`
+- `https://api.momo.minutarecore.space/graphql/` -> Saleor API via `backend`
+- `https://api.momo.minutarecore.space/app/` -> Saleor Dashboard via `backend`
 
 ## URL esperada do admin no dominio antigo
 
@@ -28,7 +36,7 @@ No ambiente local, essa mesma estrutura fica:
 ## Subir tudo
 
 ```bash
-docker compose up -d --build
+docker compose up -d --build --remove-orphans
 ```
 
 ## Preparar banco
@@ -72,3 +80,12 @@ node scripts/migrate-medusa-to-saleor.mjs
 ## Observacao do dashboard
 
 O catalogo migrado fica publicado no canal `momo-br` (`Momo Brasil`). No primeiro acesso ao dashboard, se o topo estiver em `Default Channel`, troque para `Momo Brasil` para inspecionar a operacao em BRL.
+
+## Variaveis uteis para Dokploy
+
+Se voce quiser deixar o mesmo compose pronto para producao sem renomear servicos no painel, use estas variaveis:
+
+- `BACKEND_PUBLIC_URL=https://api.momo.minutarecore.space/`
+- `SALEOR_GRAPHQL_PUBLIC_URL=https://api.momo.minutarecore.space/graphql/`
+- `SALEOR_DASHBOARD_PUBLIC_URL=https://api.momo.minutarecore.space/app/`
+- `SALEOR_ALLOWED_HOSTS=localhost,127.0.0.1,backend,saleor-api,api.momo.minutarecore.space`
