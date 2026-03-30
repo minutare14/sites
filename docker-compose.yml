@@ -3,13 +3,29 @@ services:
     image: nginx:1.27-alpine
     depends_on:
       saleor-api:
-        condition: service_started
+        condition: service_healthy
       saleor-dashboard:
-        condition: service_started
+        condition: service_healthy
     ports:
       - "${BACKEND_PORT:-8100}:80"
     volumes:
       - ./infra/nginx/saleor.conf:/etc/nginx/conf.d/default.conf:ro
+    healthcheck:
+      test: ["CMD-SHELL", "wget -q -O - http://127.0.0.1/graphql/ >/dev/null"]
+      interval: 10s
+      timeout: 5s
+      retries: 12
+    networks:
+      - dokploy-network
+    labels:
+      - "traefik.enable=true"
+      - "traefik.docker.network=dokploy-network"
+      - "traefik.http.routers.saleor-api.rule=Host(`api.momo.minutarecore.space`)"
+      - "traefik.http.routers.saleor-api.entrypoints=websecure"
+      - "traefik.http.routers.saleor-api.tls.certresolver=letsencrypt"
+      - "traefik.http.services.saleor-api.loadbalancer.server.port=80"
+      - "traefik.http.services.saleor-api.loadbalancer.healthcheck.path=/graphql/"
+      - "traefik.http.services.saleor-api.loadbalancer.healthcheck.interval=10s"
 
   saleor-db:
     image: postgres:15-alpine
@@ -24,17 +40,23 @@ services:
       retries: 10
     volumes:
       - saleor_db_data:/var/lib/postgresql/data
+    networks:
+      - dokploy-network
 
   saleor-cache:
     image: valkey/valkey:8.1-alpine
     command: ["valkey-server", "--save", "", "--appendonly", "no"]
     volumes:
       - saleor_cache_data:/data
+    networks:
+      - dokploy-network
 
   mailpit:
     image: axllent/mailpit
     ports:
       - "8025:8025"
+    networks:
+      - dokploy-network
 
   saleor-api:
     image: ghcr.io/saleor/saleor:3.22
@@ -52,8 +74,16 @@ services:
       ALLOWED_HOSTS: ${SALEOR_ALLOWED_HOSTS:-localhost,127.0.0.1,backend,saleor-api,api.momo.minutarecore.space}
       DASHBOARD_URL: ${SALEOR_DASHBOARD_PUBLIC_URL:-http://localhost:8100/app/}
       PUBLIC_URL: ${BACKEND_PUBLIC_URL:-http://localhost:8100/}
+    healthcheck:
+      test: ["CMD-SHELL", "python -c \"import urllib.request; urllib.request.urlopen('http://127.0.0.1:8000/graphql/', timeout=5).read()\""]
+      interval: 10s
+      timeout: 10s
+      retries: 18
+      start_period: 90s
     volumes:
       - saleor_media:/app/media
+    networks:
+      - dokploy-network
 
   saleor-worker:
     image: ghcr.io/saleor/saleor:3.22
@@ -70,15 +100,24 @@ services:
       - ./saleor/backend.env
     volumes:
       - saleor_media:/app/media
+    networks:
+      - dokploy-network
 
   saleor-dashboard:
     image: ghcr.io/saleor/saleor-dashboard:latest
     env_file:
       - ./saleor/dashboard.env
     environment:
-      API_URL: ${SALEOR_GRAPHQL_PUBLIC_URL:-http://localhost:8100/graphql/}
+      API_URL: ${SALEOR_GRAPHQL_PUBLIC_URL:-/graphql/}
       APP_MOUNT_URI: /app/
-      BASE_URL: ${SALEOR_DASHBOARD_PUBLIC_URL:-http://localhost:8100/app/}
+      BASE_URL: ${SALEOR_DASHBOARD_PUBLIC_URL:-/app/}
+    healthcheck:
+      test: ["CMD-SHELL", "wget -q -O - http://127.0.0.1/app/ >/dev/null"]
+      interval: 10s
+      timeout: 5s
+      retries: 12
+    networks:
+      - dokploy-network
 
   storefront:
     build:
@@ -86,7 +125,7 @@ services:
       dockerfile: Dockerfile
     depends_on:
       backend:
-        condition: service_started
+        condition: service_healthy
     environment:
       NODE_ENV: production
       SALEOR_API_URL: http://backend/graphql/
@@ -95,8 +134,21 @@ services:
       NEXT_PUBLIC_SALEOR_DASHBOARD_URL: ${SALEOR_DASHBOARD_PUBLIC_URL:-http://localhost:8100/app/}
     ports:
       - "${STOREFRONT_PORT:-3300}:3000"
+    networks:
+      - dokploy-network
+    labels:
+      - "traefik.enable=true"
+      - "traefik.docker.network=dokploy-network"
+      - "traefik.http.routers.storefront.rule=Host(`momo.minutarecore.space`)"
+      - "traefik.http.routers.storefront.entrypoints=websecure"
+      - "traefik.http.routers.storefront.tls.certresolver=letsencrypt"
+      - "traefik.http.services.storefront.loadbalancer.server.port=3000"
 
 volumes:
   saleor_db_data:
   saleor_cache_data:
   saleor_media:
+
+networks:
+  dokploy-network:
+    external: true
