@@ -1,6 +1,6 @@
 services:
   backend:
-    image: nginx:1.27-alpine
+    image: public.ecr.aws/nginx/nginx:1.27-alpine
     depends_on:
       saleor-api:
         condition: service_healthy
@@ -22,7 +22,7 @@ services:
       - "traefik.docker.network=dokploy-network"
 
   saleor-db:
-    image: postgres:15-alpine
+    image: public.ecr.aws/docker/library/postgres:15-alpine
     environment:
       POSTGRES_USER: ${SALEOR_DB_USER:-saleor}
       POSTGRES_PASSWORD: ${SALEOR_DB_PASSWORD:-saleor}
@@ -38,7 +38,7 @@ services:
       - dokploy-network
 
   saleor-cache:
-    image: valkey/valkey:8.1-alpine
+    image: public.ecr.aws/valkey/valkey:8.1-alpine
     command: ["valkey-server", "--save", "", "--appendonly", "no"]
     volumes:
       - saleor_cache_data:/data
@@ -46,7 +46,7 @@ services:
       - dokploy-network
 
   mailpit:
-    image: axllent/mailpit
+    image: ghcr.io/axllent/mailpit:latest
     ports:
       - "8025:8025"
     networks:
