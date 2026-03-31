@@ -1,23 +1,25 @@
 import type { Metadata } from "next";
-import { Noto_Serif, Manrope } from "next/font/google";
+import { Inter, Newsreader } from "next/font/google";
 import SiteFooter from "@/components/SiteFooter";
 import SiteHeader from "@/components/SiteHeader";
 import "./globals.css";
 
-const notoSerif = Noto_Serif({
-  variable: "--font-noto-serif",
+const newsreader = Newsreader({
+  variable: "--font-newsreader",
   subsets: ["latin"],
+  display: "swap",
 });
 
-const manrope = Manrope({
-  variable: "--font-manrope",
+const inter = Inter({
+  variable: "--font-inter",
   subsets: ["latin"],
+  display: "swap",
 });
 
 export const metadata: Metadata = {
-  title: "Momo & Cia | Moda que Transforma",
+  title: "Momo & Cia | Curadoria Contemporanea",
   description:
-    "Moda feminina com edicoes limitadas, elegancia acessivel e pecas pensadas para revelar a melhor essencia de cada mulher.",
+    "Moda feminina com curadoria editorial, pecas limitadas e uma vitrine conectada ao catalogo real da Momo & Cia.",
 };
 
 export default function RootLayout({
@@ -28,10 +30,10 @@ export default function RootLayout({
   return (
     <html lang="pt-BR">
       <body
-        className={`${notoSerif.variable} ${manrope.variable} min-h-screen bg-brand-cream text-brand-text antialiased`}
+        className={`${newsreader.variable} ${inter.variable} min-h-screen bg-brand-background text-brand-surface antialiased`}
       >
         <SiteHeader />
-        <main className="pt-20">{children}</main>
+        <main className="pt-28 pb-16 md:pt-32">{children}</main>
         <SiteFooter />
       </body>
     </html>

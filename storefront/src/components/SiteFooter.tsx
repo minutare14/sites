@@ -2,76 +2,70 @@ import Link from "next/link";
 
 export default function SiteFooter() {
   return (
-    <footer className="border-t border-brand-outline/10 bg-brand-cream-dark py-20 text-brand-text">
-      <div className="container mx-auto px-6">
-        <div className="mb-16 grid grid-cols-1 gap-16 md:grid-cols-4">
-          <div className="md:col-span-2">
-            <h3 className="mb-6 text-3xl text-brand-terracotta">Momo &amp; Cia</h3>
-            <p className="max-w-md text-lg leading-relaxed opacity-80">
-              Moda feminina feita para transformar autoestima em presenca, com
-              catalogo vivo, imagens reais e vitrine conectada para uma
-              experiencia de compra clara e elegante.
+    <footer className="mt-16 bg-brand-accent text-brand-surface">
+      <div className="mx-auto flex max-w-[1440px] flex-col gap-12 px-6 py-16 md:px-10 lg:px-14">
+        <div className="grid grid-cols-1 gap-12 md:grid-cols-[1.3fr_1fr_1fr_1fr]">
+          <div className="space-y-5">
+            <h3 className="font-serif text-2xl font-medium text-brand-surface">
+              MOMO &amp; CIA
+            </h3>
+            <p className="max-w-sm text-sm leading-7 text-white/65">
+              Curadoria feminina com linguagem editorial, pecas limitadas e
+              presenca silenciosa para um guarda-roupa atemporal.
             </p>
           </div>
 
-          <div>
-            <h4 className="mb-6 text-[0.6rem] font-bold uppercase tracking-[0.2em] text-brand-navy">
-              Navegacao
-            </h4>
-            <ul className="space-y-4 text-sm font-medium">
-              <li>
-                <Link href="/" className="transition-colors hover:text-brand-terracotta">
-                  Inicio
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/colecao"
-                  className="transition-colors hover:text-brand-terracotta"
-                >
-                  Produtos
-                </Link>
-              </li>
-              <li>
-                <Link href="/sobre" className="transition-colors hover:text-brand-terracotta">
-                  Sobre nos
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/contato"
-                  className="transition-colors hover:text-brand-terracotta"
-                >
-                  Fale conosco
-                </Link>
-              </li>
-            </ul>
+          <div className="space-y-4">
+            <p className="text-xs font-medium uppercase tracking-[0.28em] text-white/55">
+              Shop
+            </p>
+            <Link href="/colecao" className="block text-sm text-white/80 transition hover:text-white">
+              Colecao completa
+            </Link>
+            <Link href="/colecao" className="block text-sm text-white/80 transition hover:text-white">
+              Novidades
+            </Link>
           </div>
 
-          <div>
-            <h4 className="mb-6 text-[0.6rem] font-bold uppercase tracking-[0.2em] text-brand-navy">
-              Fale conosco
-            </h4>
-            <p className="mb-6 text-sm font-medium opacity-80">Sao Paulo, SP</p>
+          <div className="space-y-4">
+            <p className="text-xs font-medium uppercase tracking-[0.28em] text-white/55">
+              Marca
+            </p>
+            <Link href="/sobre" className="block text-sm text-white/80 transition hover:text-white">
+              Sobre
+            </Link>
+            <Link href="/contato" className="block text-sm text-white/80 transition hover:text-white">
+              Contato
+            </Link>
+          </div>
+
+          <div className="space-y-4">
+            <p className="text-xs font-medium uppercase tracking-[0.28em] text-white/55">
+              Concierge
+            </p>
+            <p className="text-sm text-white/80">Sao Paulo, SP</p>
             <a
               href="https://wa.me/5511999999999"
               target="_blank"
               rel="noreferrer"
-              className="inline-block border-b-2 border-brand-terracotta pb-1 text-sm font-bold text-brand-terracotta transition-opacity hover:opacity-70"
+              className="inline-flex text-sm text-white underline underline-offset-6 transition hover:text-brand-warm"
             >
               Enviar WhatsApp
             </a>
           </div>
         </div>
 
-        <div className="dev-credit">
-          Site desenvolvido por <strong>Minutare</strong> -
-          <a
-            href="mailto:emanoelmcedo@gmail.com"
-            className="ml-1 underline hover:text-brand-terracotta"
-          >
-            emanoelmcedo@gmail.com
-          </a>
+        <div className="flex flex-col gap-4 border-t border-white/10 pt-6 text-xs uppercase tracking-[0.22em] text-white/50 md:flex-row md:items-center md:justify-between">
+          <p>© 2026 Momo &amp; Cia. Todos os direitos reservados.</p>
+          <div className="dev-credit border-0 p-0 text-right">
+            SITE DESENVOLVIDO POR <strong>MINUTARE</strong>
+            <a
+              href="mailto:emanoelmcedo@gmail.com"
+              className="ml-2 underline underline-offset-4 hover:text-white"
+            >
+              EMANOELMCEDO@GMAIL.COM
+            </a>
+          </div>
         </div>
       </div>
     </footer>
