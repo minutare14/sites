@@ -1,4 +1,6 @@
-FROM public.ecr.aws/docker/library/node:20-alpine AS deps
+FROM mcr.microsoft.com/devcontainers/javascript-node:1-20-bookworm AS deps
+
+USER root
 
 WORKDIR /app
 
@@ -6,7 +8,9 @@ COPY package*.json ./
 
 RUN npm ci
 
-FROM public.ecr.aws/docker/library/node:20-alpine AS builder
+FROM mcr.microsoft.com/devcontainers/javascript-node:1-20-bookworm AS builder
+
+USER root
 
 WORKDIR /app
 
@@ -15,7 +19,9 @@ COPY . .
 
 RUN npm run build
 
-FROM public.ecr.aws/docker/library/node:20-alpine
+FROM mcr.microsoft.com/devcontainers/javascript-node:1-20-bookworm
+
+USER root
 
 WORKDIR /app
 ENV NODE_ENV=production
