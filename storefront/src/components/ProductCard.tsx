@@ -24,9 +24,6 @@ export default function ProductCard({ product }: ProductCardProps) {
           <div className="absolute inset-0 bg-brand-terracotta/5" />
         )}
         <div className="absolute inset-0 bg-gradient-to-t from-brand-navy/25 via-transparent to-transparent opacity-70" />
-        <div className="absolute top-4 right-4 rounded-full bg-brand-terracotta px-3 py-1 text-[0.6rem] font-bold uppercase tracking-widest text-white">
-          Saleor
-        </div>
       </div>
 
       <h3 className="mb-1 text-lg font-serif transition-colors group-hover:text-brand-terracotta">

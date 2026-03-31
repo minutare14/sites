@@ -9,8 +9,8 @@ export default function SiteFooter() {
             <h3 className="mb-6 text-3xl text-brand-terracotta">Momo &amp; Cia</h3>
             <p className="max-w-md text-lg leading-relaxed opacity-80">
               Moda feminina feita para transformar autoestima em presenca, com
-              catalogo editavel no Saleor e vitrine conectada ao storefront
-              atual.
+              catalogo vivo, imagens reais e vitrine conectada para uma
+              experiencia de compra clara e elegante.
             </p>
           </div>
 

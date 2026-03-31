@@ -9,10 +9,15 @@ import type {
 } from "@/lib/saleor/types";
 
 const saleorApiUrl =
-  process.env.SALEOR_API_URL || "http://localhost:8000/graphql/";
-const channel = process.env.SALEOR_CHANNEL_SLUG || "momo-br";
+  process.env.SALEOR_API_URL || "http://localhost:8100/graphql/";
+const channel =
+  process.env.SALEOR_CHANNEL_SLUG ||
+  process.env.DEFAULT_CHANNEL_SLUG ||
+  "momo-br";
 const saleorMediaBaseUrl =
-  process.env.SALEOR_MEDIA_BASE_URL || "http://localhost:8100/";
+  process.env.SALEOR_MEDIA_BASE_URL ||
+  process.env.BACKEND_PUBLIC_URL ||
+  "http://localhost:8100/";
 
 type GraphQLResponse<T> = {
   data?: T;
@@ -100,10 +105,28 @@ function normalizeDescription(description: unknown): string {
   return String(description);
 }
 
+function normalizeMediaBaseUrl(url: string) {
+  return url.endsWith("/") ? url : `${url}/`;
+}
+
 function normalizeMediaUrl(url: string) {
+  if (!url) {
+    return url;
+  }
+
+  const baseUrl = normalizeMediaBaseUrl(saleorMediaBaseUrl);
+
+  if (url.startsWith("/")) {
+    return new URL(url, baseUrl).toString();
+  }
+
   return url
-    .replace("http://localhost:8000/", saleorMediaBaseUrl)
-    .replace("http://127.0.0.1:8000/", saleorMediaBaseUrl);
+    .replace("http://saleor-api:8000/", baseUrl)
+    .replace("http://backend/", baseUrl)
+    .replace("http://localhost:8000/", baseUrl)
+    .replace("http://127.0.0.1:8000/", baseUrl)
+    .replace("http://localhost:8100/", baseUrl)
+    .replace("http://127.0.0.1:8100/", baseUrl);
 }
 
 function mapProduct(node: {
@@ -113,6 +136,10 @@ function mapProduct(node: {
   description: unknown;
   category: { id: string; name: string; slug: string } | null;
   collections?: SaleorCollection[] | null;
+  thumbnail?: {
+    url: string;
+    alt: string | null;
+  } | null;
   media?: {
     url: string;
     alt: string | null;
@@ -141,6 +168,12 @@ function mapProduct(node: {
     ...item,
     url: normalizeMediaUrl(item.url),
   }));
+  const normalizedThumbnail = node.thumbnail
+    ? {
+        ...node.thumbnail,
+        url: normalizeMediaUrl(node.thumbnail.url),
+      }
+    : null;
   const price =
     node.pricing?.priceRange?.start?.gross ||
     ({
@@ -159,8 +192,11 @@ function mapProduct(node: {
         ...collection,
         description: normalizeDescription(collection.description),
       })) || [],
-    media: normalizedMedia,
-    thumbnail: normalizedMedia[0] || null,
+    media:
+      normalizedMedia.length || !normalizedThumbnail
+        ? normalizedMedia
+        : [normalizedThumbnail],
+    thumbnail: normalizedThumbnail || normalizedMedia[0] || null,
     price,
     variants: node.productVariants?.edges?.map((edge) => edge.node) || [],
   };

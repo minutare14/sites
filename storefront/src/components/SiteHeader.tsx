@@ -7,6 +7,8 @@ const links = [
   { href: "/contato", label: "Contato" },
 ];
 
+const showAdminLink = process.env.NEXT_PUBLIC_SHOW_ADMIN_LINK === "true";
+
 export default function SiteHeader() {
   return (
     <header className="fixed top-0 z-50 w-full border-b border-brand-outline/5 bg-brand-cream/80 backdrop-blur-xl">
@@ -31,12 +33,14 @@ export default function SiteHeader() {
         </div>
 
         <div className="flex items-center gap-4 md:gap-6">
-          <a
-            href={process.env.NEXT_PUBLIC_SALEOR_DASHBOARD_URL || "/app/"}
-            className="text-[0.7rem] font-bold uppercase tracking-[0.1em] text-brand-terracotta hover:underline"
-          >
-            Admin Saleor
-          </a>
+          {showAdminLink ? (
+            <a
+              href={process.env.NEXT_PUBLIC_SALEOR_DASHBOARD_URL || "/app/"}
+              className="text-[0.7rem] font-bold uppercase tracking-[0.1em] text-brand-terracotta hover:underline"
+            >
+              Admin Saleor
+            </a>
+          ) : null}
           <Link
             href="/colecao"
             className="rounded-md bg-brand-terracotta px-6 py-2 text-[0.7rem] font-bold uppercase tracking-widest text-white shadow-lg shadow-brand-terracotta/20 transition-transform hover:scale-105"

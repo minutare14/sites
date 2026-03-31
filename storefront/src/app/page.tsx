@@ -84,8 +84,9 @@ export default async function HomePage() {
                 reencontro.
               </p>
               <p>
-                O catalogo e vivo, editavel no admin e organizado para a loja
-                parecer real em cada vitrine, pagina de produto e navegacao.
+                O catalogo e vivo, atualizado pelo time e organizado para a
+                loja parecer real em cada vitrine, pagina de produto e
+                navegacao.
               </p>
             </div>
             <div className="mt-10 flex flex-wrap gap-4">
@@ -108,7 +109,7 @@ export default async function HomePage() {
           </h2>
           <p className="mx-auto mb-12 max-w-2xl text-xl leading-relaxed opacity-80">
             Explore pecas desenhadas para elevar sua autoestima, com imagens,
-            precos e variacoes vindos do Saleor de verdade.
+            precos e variacoes vindos do catalogo real da loja.
           </p>
           <Link
             href="/colecao"

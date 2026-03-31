@@ -18,6 +18,10 @@ export const PRODUCTS_QUERY = /* GraphQL */ `
             slug
             description
           }
+          thumbnail {
+            url
+            alt
+          }
           media {
             url
             alt
@@ -55,6 +59,10 @@ export const PRODUCT_BY_SLUG_QUERY = /* GraphQL */ `
         name
         slug
         description
+      }
+      thumbnail {
+        url
+        alt
       }
       media {
         url

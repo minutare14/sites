@@ -16,12 +16,10 @@ export default async function CollectionPage() {
           <h4 className="mb-4 text-[0.6rem] font-bold uppercase tracking-[0.3em] text-brand-navy">
             Colecao completa
           </h4>
-          <h1 className="text-5xl md:text-6xl">
-            Catalogo real conectado ao Saleor
-          </h1>
+          <h1 className="text-5xl md:text-6xl">Catalogo real da Momo &amp; Cia</h1>
           <p className="mt-6 text-lg leading-relaxed text-brand-text/75">
             Produtos, imagens, preco em real, slug e organizacao editorial
-            vindos da API GraphQL do Saleor.
+            vindos do catalogo conectado da loja.
           </p>
         </div>
 
@@ -41,6 +39,12 @@ export default async function CollectionPage() {
             <ProductCard key={product.id} product={product} />
           ))}
         </div>
+
+        {!products.length ? (
+          <p className="mt-10 text-sm text-brand-text/70">
+            Nenhum produto publicado foi encontrado no canal atual da loja.
+          </p>
+        ) : null}
       </div>
     </section>
   );
